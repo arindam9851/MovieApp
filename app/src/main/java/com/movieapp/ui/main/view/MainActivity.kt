@@ -6,10 +6,13 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.movieapp.R
 import com.movieapp.domainmodel.Trending
+import com.movieapp.ui.main.adapter.TrendingAdapter
 import com.movieapp.ui.main.viewmodel.MainStateEvent
 import com.movieapp.ui.main.viewmodel.MainViewModel
 import com.movieapp.utils.DataState
@@ -25,9 +28,14 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     @Inject
     lateinit var networkHelper: NetworkHelper
+    private lateinit var mAdapter: TrendingAdapter
+    private var mList = ArrayList<Trending>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setUpUI()
         subscribeObverser()
 
         if(networkHelper.isNetworkConnected()){
@@ -38,12 +46,23 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun setUpUI() {
+        mAdapter = TrendingAdapter(mList, this)
+        trending_recyclerview.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL,false)
+            adapter = mAdapter
+        }
+
+    }
+
     private fun subscribeObverser(){
         viewModel.datastate.observe(this, Observer {dataState->
             when(dataState){
                 is DataState.Success<List<Trending>>->{
                     displayProgressBar(false)
-                    appendBlogTitles(dataState.data)
+                    setData(dataState.data)
                 }
                 is DataState.Error ->{
                     displayProgressBar(false)
@@ -63,11 +82,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayError(message: String?){
-        println("Debug: $message")
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
-    private fun appendBlogTitles(data: List<Trending>){
-        println("Debug: $data")
+    private fun setData(data: List<Trending>){
+        mList.clear()
+        mList.addAll(data)
+        mAdapter.notifyDataSetChanged()
 
     }
 }

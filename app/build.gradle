@@ -67,4 +67,13 @@ dependencies {
     implementation "androidx.room:room-runtime:$room"
     implementation "androidx.room:room-ktx:$room"
     kapt "androidx.room:room-compiler:$room"
+
+    def dimension = "1.0.4"
+    //Dimension
+    implementation "com.intuit.sdp:sdp-android:$dimension"
+    implementation "com.intuit.ssp:ssp-android:$dimension"
+
+    def glide= "4.12.0"
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 }
