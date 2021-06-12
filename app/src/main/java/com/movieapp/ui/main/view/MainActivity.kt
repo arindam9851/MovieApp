@@ -13,20 +13,24 @@ import com.movieapp.domainmodel.Trending
 import com.movieapp.ui.main.viewmodel.MainStateEvent
 import com.movieapp.ui.main.viewmodel.MainViewModel
 import com.movieapp.utils.DataState
+import com.movieapp.utils.NetworkHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-@ExperimentalCoroutinesApi
+import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var networkHelper: NetworkHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         subscribeObverser()
 
-        if(isNetworkAvailable()){
+        if(networkHelper.isNetworkConnected()){
             viewModel.setStateEvent(MainStateEvent.GetNetworkTrendingEvent)
         }
         else{
@@ -34,16 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-
-    private fun isNetworkAvailable(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE)
-        return if (connectivityManager is ConnectivityManager) {
-            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-            networkInfo?.isConnected ?: false
-        } else false
-    }
-
     private fun subscribeObverser(){
         viewModel.datastate.observe(this, Observer {dataState->
             when(dataState){
