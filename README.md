@@ -14,6 +14,5 @@
 
 ![Screenshot_20210612-222854_MovieApp](https://user-images.githubusercontent.com/8407230/121783595-271edb80-cbcd-11eb-94fd-338a211124b3.jpg)
 
-In this Application 
 
 
