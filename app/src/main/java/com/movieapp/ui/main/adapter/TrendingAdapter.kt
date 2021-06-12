@@ -11,6 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.movieapp.R
 import com.movieapp.domainmodel.Trending
 import com.movieapp.ui.main.view.MainActivity
+import com.movieapp.utils.Constants.Companion.IMAGE_URL
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class TrendingAdapter @ExperimentalCoroutinesApi constructor(val list : List<Trending>, val mContext : MainActivity) : RecyclerView.Adapter<TrendingAdapter.ViewHolder>() {
@@ -29,7 +30,7 @@ class TrendingAdapter @ExperimentalCoroutinesApi constructor(val list : List<Tre
 
         Glide
             .with(mContext)
-            .load("https://image.tmdb.org/t/p/w500${model.imagepath}")
+            .load(IMAGE_URL+model.imagepath)
             .placeholder(R.drawable.ic_launcher_foreground)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .into(holder.imgPoster);

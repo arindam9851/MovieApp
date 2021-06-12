@@ -3,6 +3,7 @@ package com.movieapp.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.movieapp.data.api.ApiInterface
+import com.movieapp.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,7 @@ object RetrofitModule {
     @Provides
     fun provideRetrofit(gson: Gson):Retrofit.Builder{
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
 

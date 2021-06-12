@@ -6,6 +6,7 @@ import com.movieapp.data.api.networkentitymodel.TvNetworkEntity
 import com.movieapp.domainmodel.Trending
 import com.movieapp.room.CacheMapper
 import com.movieapp.room.TrendingDao
+import com.movieapp.utils.Constants.Companion.API_KEY
 import com.movieapp.utils.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -26,7 +27,7 @@ constructor(
     suspend fun getTrending():Flow<DataState<List<Trending>>> = flow {
         emit(DataState.Loading)
         try {
-            val networkResponse= apiInterface.getTrending("3a7ea0f56514e3a2aee56b40f2008c73")
+            val networkResponse= apiInterface.getTrending(API_KEY)
             val trendingData= networkMapper.mapFromEntityList(networkResponse.results)
             for ( trending in trendingData ){
                 trendingDao.insert(cacheMapper.mapToEntity(trending))
