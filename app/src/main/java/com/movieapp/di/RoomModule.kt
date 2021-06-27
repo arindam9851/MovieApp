@@ -34,4 +34,6 @@ object RoomModule {
     fun provideTrendingDao(trendingDatabse: TrendingDatabse):TrendingDao{
         return trendingDatabse.trendingDoa()
     }
+
+
 }

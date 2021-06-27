@@ -16,7 +16,6 @@ class MainViewModel
 @ViewModelInject
 constructor(
     private val mainRepository: MainRepository,
-    @Assisted private val saveStateHandle: SavedStateHandle
 
 ):ViewModel()
 {

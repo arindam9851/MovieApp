@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setUpUI()
         subscribeObverser()
+        println("debug: ViewModel Instance  $viewModel")
 
         if(networkHelper.isNetworkConnected()){
             viewModel.setStateEvent(MainStateEvent.GetNetworkTrendingEvent)
