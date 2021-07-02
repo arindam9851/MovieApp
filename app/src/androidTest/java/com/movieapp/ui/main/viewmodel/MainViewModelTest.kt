@@ -14,6 +14,7 @@ import com.movieapp.room.CacheMapper
 import com.movieapp.room.TrendingCacheEntity
 import com.movieapp.room.TrendingDao
 import com.movieapp.room.TrendingDatabse
+import com.movieapp.ui.stateevent.MainStateEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
