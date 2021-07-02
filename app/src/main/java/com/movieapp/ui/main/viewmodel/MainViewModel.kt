@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.movieapp.data.repository.MainRepository
 import com.movieapp.domainmodel.Trending
+import com.movieapp.ui.stateevent.MainStateEvent
 import com.movieapp.utils.DataState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
@@ -47,10 +48,4 @@ constructor(
     }
 
 
-}
-sealed class MainStateEvent{
-
-    object GetNetworkTrendingEvent: MainStateEvent()
-
-    object GetCacheTrendingEvent: MainStateEvent()
 }

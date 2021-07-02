@@ -98,4 +98,5 @@ dependencies {
 
     def test_version = "1.2.0"
     androidTestImplementation "androidx.test:core-ktx:$test_version"
+
 }

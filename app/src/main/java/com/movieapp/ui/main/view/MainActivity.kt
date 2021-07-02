@@ -1,8 +1,5 @@
 package com.movieapp.ui.main.view
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.movieapp.R
 import com.movieapp.domainmodel.Trending
 import com.movieapp.ui.main.adapter.TrendingAdapter
-import com.movieapp.ui.main.viewmodel.MainStateEvent
 import com.movieapp.ui.main.viewmodel.MainViewModel
+import com.movieapp.ui.stateevent.MainStateEvent
 import com.movieapp.utils.DataState
 import com.movieapp.utils.NetworkHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -46,7 +44,14 @@ class MainActivity : AppCompatActivity() {
             viewModel.setStateEvent(MainStateEvent.GetCacheTrendingEvent)
 
         }
+
+
+
+
+
     }
+
+
 
     private fun setUpUI() {
         mAdapter = TrendingAdapter(mList, this)

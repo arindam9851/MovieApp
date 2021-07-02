@@ -41,6 +41,7 @@ class MainViewModelTest{
     @get:Rule(order = 2)
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+
     @Inject
     lateinit var appDao: TrendingDao
 
@@ -72,6 +73,7 @@ class MainViewModelTest{
         assertThat(result != null).isTrue()
 
     }
+
 
 
     @Module
